@@ -1,5 +1,7 @@
 package com.healthapp.doctor;
 
+import com.healthapp.user.User;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -20,6 +22,8 @@ public class Doctor implements Serializable {
     private String  email;
     private String  cnam;
     private String  phone;
+    @OneToOne
+    private User user;
 
     public Doctor(String firstName, String lastName, Date birthDate, byte[] photo, String email, String cnam, String phone) {
         this.firstName = firstName;
@@ -97,5 +101,13 @@ public class Doctor implements Serializable {
     public  boolean equals(Doctor doctor)
     {
         return (this.id == doctor.id);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

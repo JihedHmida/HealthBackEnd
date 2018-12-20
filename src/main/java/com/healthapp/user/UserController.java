@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "localhost:4200",allowedHeaders = "*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class UserController {
 
     @Autowired

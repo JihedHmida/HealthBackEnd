@@ -17,6 +17,7 @@ public class User {
     private String userPwd;
     private boolean isAdmin;
 
+
     public User() {
         this.isAdmin = false;
     }
