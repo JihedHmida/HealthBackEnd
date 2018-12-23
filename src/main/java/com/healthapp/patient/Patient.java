@@ -22,10 +22,10 @@ public class Patient implements Serializable {
     private String  email;
     private String  cnam;
     private String  phone;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    public Patient(String firstName, String lastName, Date birthDate, byte[] photo, String email, String cnam, String phone) {
+    public Patient(String firstName, String lastName, Date birthDate, byte[] photo, String email, String cnam, String phone, User user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -33,6 +33,7 @@ public class Patient implements Serializable {
         this.email = email;
         this.cnam = cnam;
         this.phone = phone;
+        this.user = user;
     }
 
     public Patient() {

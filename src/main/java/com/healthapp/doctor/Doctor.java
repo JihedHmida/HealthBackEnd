@@ -20,18 +20,18 @@ public class Doctor implements Serializable {
     private Date    birthDate;
     private byte[]  photo;
     private String  email;
-    private String  cnam;
+    private String  publicCode;
     private String  phone;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    public Doctor(String firstName, String lastName, Date birthDate, byte[] photo, String email, String cnam, String phone, User user) {
+    public Doctor(String firstName, String lastName, Date birthDate, byte[] photo, String email, String code, String phone, User user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.photo = photo;
         this.email = email;
-        this.cnam = cnam;
+        this.publicCode = code;
         this.phone = phone;
         this.user = user;
     }
@@ -83,14 +83,6 @@ public class Doctor implements Serializable {
         this.email = email;
     }
 
-    public String getCnam() {
-        return cnam;
-    }
-
-    public void setCnam(String cnam) {
-        this.cnam = cnam;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -110,5 +102,13 @@ public class Doctor implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getPublicCode() {
+        return publicCode;
+    }
+
+    public void setPublicCode(String publicCode) {
+        this.publicCode = publicCode;
     }
 }

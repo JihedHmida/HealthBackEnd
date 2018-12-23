@@ -1,11 +1,13 @@
 package com.healthapp.patient;
 
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PatientController {
 
     @Autowired
@@ -23,7 +25,7 @@ public class PatientController {
         return patientService.findPatientById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST,value = "/patient")
+    @RequestMapping(method = RequestMethod.POST,value = "/patient/add")
     public void addPatient(@RequestBody Patient patient)
     {
         patientService.addPatient(patient);
