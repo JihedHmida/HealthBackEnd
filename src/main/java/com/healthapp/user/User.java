@@ -3,16 +3,16 @@ package com.healthapp.user;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long userId;
+    //@Email(message="Please enter a valid email")
+    @Column(nullable = false,updatable = false,unique = true)
     private String userName;
     private String userPwd;
     private boolean isAdmin;

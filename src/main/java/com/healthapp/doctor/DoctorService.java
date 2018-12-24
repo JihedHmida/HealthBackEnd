@@ -16,6 +16,10 @@ public class DoctorService {
         return doctorRepository.findAll();
     }
 
+    public Doctor findDoctorByEmail(String email) {
+        return doctorRepository.findDoctorByEmail(email);
+    }
+
     public Doctor findDoctorById(long id) {
         return doctorRepository.findDoctorById(id);
     }
@@ -25,17 +29,23 @@ public class DoctorService {
         return doctorRepository.findDoctorsByFirstName(firstName);
     }
 
-    public void addDoctor(Doctor doc) {
-        doctorRepository.save(doc);
+    public Doctor addDoctor(Doctor doc) {
+        return doctorRepository.save(doc);
     }
 
+    @SuppressWarnings("Duplicates")
     public void updateDoctor(Doctor doc, long id) {
 
         Doctor doctorToUpdate = findDoctorById(id);
         doctorToUpdate.setFirstName(doc.getFirstName());
         doctorToUpdate.setLastName(doc.getLastName());
-        doctorToUpdate.setEmail(doc.getEmail());
+        doctorToUpdate.setBirthDate(doc.getBirthDate());
+        doctorToUpdate.setPhoto(doc.getPhoto());
+        doctorToUpdate.setPhone(doc.getPhone());
+        doctorToUpdate.getUser().setUserPwd(doc.getUser().getUserPwd());
+        doctorToUpdate.getUser().setAdmin(doc.getUser().isAdmin());
         doctorRepository.save(doctorToUpdate);
+
     }
 
 

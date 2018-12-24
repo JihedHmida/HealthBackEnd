@@ -3,6 +3,7 @@ package com.healthapp.patient;
 import com.healthapp.user.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,12 +16,20 @@ public class Patient implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "PId",nullable =false ,updatable=false )
     private long    id;
+    @NotBlank(message="Please enter your name")
     private String  firstName;
+    //@NotBlank(message="Please enter your last name")
     private String  lastName;
+    //@NotBlank(message="Please enter your birthday")
     private Date    birthDate;
     private byte[]  photo;
+    @NotBlank(message="Please enter your email")
+    //@Email(message="Please enter a valid email")
     private String  email;
+    //@NotBlank(message="Please enter your CNAM Code")
     private String  cnam;
+    //@NotBlank(message="Please enter your phone number")
+    //@Pattern(regexp="[\\d]{8}",message = "Check your phone Number")
     private String  phone;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
@@ -100,7 +109,7 @@ public class Patient implements Serializable {
         this.phone = phone;
     }
 
-    public  boolean equals(Patient patient)
+    public boolean equals(Patient patient)
     {
         return (this.id == patient.id);
     }

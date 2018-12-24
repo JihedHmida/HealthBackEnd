@@ -24,9 +24,11 @@ public class UserController {
        return  this.userService.findUser(user);
 
     }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/user/add")
-    public void addUser(@RequestBody User user){
-        this.userService.addUser(user);
+    @RequestMapping("/users/{id}")
+    public User getDoctorById(@PathVariable long id)
+    {
+        return userService.findUserById(id);
     }
+
+
 }

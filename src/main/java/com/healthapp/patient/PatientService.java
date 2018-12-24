@@ -15,6 +15,10 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
+    public Patient findDoctorByEmail(String email) {
+        return patientRepository.findPatientByEmail(email);
+    }
+
     public Patient findPatientById(long id) {
         return patientRepository.findPatientById(id);
     }
@@ -24,17 +28,24 @@ public class PatientService {
         return patientRepository.findPatientsByFirstName(firstName);
     }
 
-    public void addPatient(Patient doc) {
-        patientRepository.save(doc);
+    public Patient addPatient(Patient doc) {
+       return patientRepository.save(doc);
     }
-
-    public void updatePatient(Patient doc, long id) {
+    @SuppressWarnings("Duplicates")
+    public void updatePatient(Patient patient, long id) {
 
         Patient patientToUpdate = findPatientById(id);
-        patientToUpdate.setFirstName(doc.getFirstName());
-        patientToUpdate.setLastName(doc.getLastName());
-        patientToUpdate.setEmail(doc.getEmail());
+        patientToUpdate.setFirstName(patient.getFirstName());
+        patientToUpdate.setLastName(patient.getLastName());
+        patientToUpdate.setBirthDate(patient.getBirthDate());
+        patientToUpdate.setPhoto(patient.getPhoto());
+        patientToUpdate.setPhone(patient.getPhone());
+        patientToUpdate.getUser().setUserPwd(patient.getUser().getUserPwd());
+        patientToUpdate.getUser().setAdmin(patient.getUser().isAdmin());
         patientRepository.save(patientToUpdate);
+
+
+
     }
 
 

@@ -15,12 +15,12 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public void addUser(User user){
-        this.userRepository.save(user);
+    public User findUserById(long id)
+    {
+        return  this.userRepository.findUserByUserId(id);
     }
 
     public User findUser(User user){
         return this.userRepository.findUserByUserNameAndUserPwd(user.getUserName(),user.getUserPwd());
     }
-
 }
