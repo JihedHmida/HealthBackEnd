@@ -8,4 +8,7 @@ public interface ConsultationRepository extends JpaRepository <Consultation,Long
 
     public List<Consultation> findConsultationsByPatientId(long id);
 
+    public List<Consultation> findConsultationsByDoctorId(long id);
+
+    public Consultation findConsultationById(long id);
 }

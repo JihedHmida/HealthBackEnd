@@ -26,6 +26,7 @@ public class Consultation implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "DOCTOR_ID")
+
     private Doctor  doctor;
 
     public Consultation(Date date, String note, Patient patient, Doctor doctor) {

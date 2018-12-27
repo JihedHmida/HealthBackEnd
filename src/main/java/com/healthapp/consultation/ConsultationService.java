@@ -15,24 +15,14 @@ public class ConsultationService {
 
     @Autowired
     ConsultationRepository consultationRepository;
-    @Autowired
-    DoctorRepository doctorRepository;
-    @Autowired
-    PatientRepository patientRepository;
-
 
 
     public List<Consultation> findAll() {
         return  consultationRepository.findAll();
     }
 
-    public void  addConsultation (){
+    public void  addConsultation (Consultation consultation){
 
-
-        Doctor doctor = doctorRepository.findDoctorById(2);
-        Patient patient = patientRepository.findPatientById(2);
-
-        Consultation consultation = new Consultation(new Date(12-3-1994),"second",patient,doctor);
         consultationRepository.save(consultation);
     }
 
@@ -40,6 +30,12 @@ public class ConsultationService {
     {
        return consultationRepository.findConsultationsByPatientId(id);
     }
+    public List<Consultation> findByDoctorId(long id )
+    {
+        return  consultationRepository.findConsultationsByDoctorId(id);
+    }
 
-
+    public Consultation findConsultationByID(long id) {
+        return  consultationRepository.findConsultationById(id);
+    }
 }
