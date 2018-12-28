@@ -23,6 +23,7 @@ public class Doctor implements Serializable {
     //@NotBlank(message="Please enter your last name")
     private String  lastName;
     //@NotBlank(message="Please enter your birthday")
+    @Temporal(TemporalType.DATE)
     private Date    birthDate;
     private byte[]  photo;
     @NotBlank(message="Please enter your email")
@@ -35,6 +36,7 @@ public class Doctor implements Serializable {
     private String  phone;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
+
 
     public Doctor(String firstName, String lastName, Date birthDate, byte[] photo, String email, String code, String phone, User user) {
         this.firstName = firstName;

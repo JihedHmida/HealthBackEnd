@@ -17,16 +17,17 @@ public class Consultation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long    id;
-    private Date    date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
     private String  note;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "patient_ID")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "DOCTOR_ID")
-
+    @JoinColumn(name = "doctor_Id")
     private Doctor  doctor;
 
     public Consultation(Date date, String note, Patient patient, Doctor doctor) {

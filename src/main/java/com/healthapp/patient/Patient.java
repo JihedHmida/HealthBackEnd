@@ -21,6 +21,7 @@ public class Patient implements Serializable {
     //@NotBlank(message="Please enter your last name")
     private String  lastName;
     //@NotBlank(message="Please enter your birthday")
+    @Temporal(TemporalType.DATE)
     private Date    birthDate;
     private byte[]  photo;
     @NotBlank(message="Please enter your email")
