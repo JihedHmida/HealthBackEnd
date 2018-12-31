@@ -36,14 +36,22 @@ public class ConsultationController {
     @RequestMapping("/consultation/patient{id}")
     public List<Consultation> getConsultationByPatientId(@PathVariable long id)
     {
-        return consultationService.findByPatientId(id);
+        return consultationService.findConsultationsByPatientId(id);
     }
 
     @RequestMapping("/consultation/doctor{id}")
     public List<Consultation> getConsultationByDoctorId(@PathVariable long id)
     {
-        return consultationService.findByDoctorId(id);
+        return consultationService.findConsultationsByDoctorId(id);
     }
 
+    @RequestMapping(method = RequestMethod.PUT,value = "/consultation/{id}")
+    public void updateConsultation(@RequestBody Consultation consultation , @PathVariable long id) {
+        consultationService.updateConsultation(consultation,id);
+    }
 
+    @RequestMapping(method = RequestMethod.DELETE , value = "/consultation/{id}" )
+    public void deleteConsultation(@PathVariable long id ){
+         consultationService.deleteConsultation(id);
+    }
 }

@@ -26,16 +26,28 @@ public class ConsultationService {
         consultationRepository.save(consultation);
     }
 
-    public List<Consultation> findByPatientId(long id)
+    public List<Consultation> findConsultationsByPatientId(long id)
     {
        return consultationRepository.findConsultationsByPatientId(id);
     }
-    public List<Consultation> findByDoctorId(long id )
+    public List<Consultation> findConsultationsByDoctorId(long id )
     {
         return  consultationRepository.findConsultationsByDoctorId(id);
     }
 
     public Consultation findConsultationByID(long id) {
         return  consultationRepository.findConsultationById(id);
+    }
+
+    public void deleteConsultation(long id) {
+         consultationRepository.delete(findConsultationByID(id));
+    }
+
+    public void updateConsultation(Consultation consultation, long id) {
+
+        Consultation consultation1ToUpdate = findConsultationByID(id);
+        consultation1ToUpdate.setDate(consultation.getDate());
+        consultation1ToUpdate.setNote(consultation.getNote());
+        consultationRepository.save(consultation1ToUpdate);
     }
 }
