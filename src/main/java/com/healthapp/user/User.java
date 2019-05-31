@@ -1,59 +1,81 @@
 package com.healthapp.user;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Collection;
 
 @Entity
-public class User {
+public class User implements UserDetails {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private long userId;
-    //@Email(message="Please enter a valid email")
-    @Column(nullable = false,updatable = false,unique = true)
-    private String userName;
-    private String userPwd;
-    private boolean isAdmin;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+
+    private String username;
+
+    @JsonIgnore
+    private String password;
 
 
     public User() {
-        this.isAdmin = false;
     }
 
-    public User(String userName, String userPwd) {
-        this.userName = userName;
-        this.userPwd = userPwd;
-        this.isAdmin = false;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
-    public String getUserPwd() {
-        return userPwd;
+    @Override
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-
-    public long getUserId() {
-        return userId;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

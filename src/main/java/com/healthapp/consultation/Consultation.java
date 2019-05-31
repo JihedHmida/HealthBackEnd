@@ -11,16 +11,16 @@ import java.util.Date;
 @Entity
 public class Consultation implements Serializable {
 
-    private static final  long serialVersionUID = 1L ;
+    private static final long serialVersionUID = 1L;
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long    id;
+    private long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    private String  note;
+    private String note;
 
     @ManyToOne
     @JoinColumn(name = "patient_ID")
@@ -28,7 +28,7 @@ public class Consultation implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "doctor_Id")
-    private Doctor  doctor;
+    private Doctor doctor;
 
     public Consultation(Date date, String note, Patient patient, Doctor doctor) {
         this.date = date;

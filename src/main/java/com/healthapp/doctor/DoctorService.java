@@ -9,7 +9,8 @@ import java.util.List;
 @Service
 public class DoctorService {
 
-    @Autowired DoctorRepository doctorRepository;
+    @Autowired
+    DoctorRepository doctorRepository;
 
 
     public List<Doctor> findAll() {
@@ -24,8 +25,7 @@ public class DoctorService {
         return doctorRepository.findDoctorById(id);
     }
 
-    public List<Doctor> findDoctorsByFirstName(String firstName )
-    {
+    public List<Doctor> findDoctorsByFirstName(String firstName) {
         return doctorRepository.findDoctorsByFirstName(firstName);
     }
 
@@ -42,8 +42,7 @@ public class DoctorService {
         doctorToUpdate.setBirthDate(doc.getBirthDate());
         doctorToUpdate.setPhoto(doc.getPhoto());
         doctorToUpdate.setPhone(doc.getPhone());
-        doctorToUpdate.getUser().setUserPwd(doc.getUser().getUserPwd());
-        doctorToUpdate.getUser().setAdmin(doc.getUser().isAdmin());
+        doctorToUpdate.getUser().setPassword(doc.getUser().getPassword());
         doctorRepository.save(doctorToUpdate);
 
     }

@@ -9,7 +9,7 @@ import java.util.List;
 public class PatientService {
 
     @Autowired
-    private   PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
     public List<Patient> findAll() {
         return patientRepository.findAll();
@@ -23,14 +23,14 @@ public class PatientService {
         return patientRepository.findPatientById(id);
     }
 
-    public List<Patient> findPatientsByFirstName(String firstName )
-    {
+    public List<Patient> findPatientsByFirstName(String firstName) {
         return patientRepository.findPatientsByFirstName(firstName);
     }
 
     public Patient addPatient(Patient doc) {
-       return patientRepository.save(doc);
+        return patientRepository.save(doc);
     }
+
     @SuppressWarnings("Duplicates")
     public void updatePatient(Patient patient, long id) {
 
@@ -40,10 +40,8 @@ public class PatientService {
         patientToUpdate.setBirthDate(patient.getBirthDate());
         patientToUpdate.setPhoto(patient.getPhoto());
         patientToUpdate.setPhone(patient.getPhone());
-        patientToUpdate.getUser().setUserPwd(patient.getUser().getUserPwd());
-        patientToUpdate.getUser().setAdmin(patient.getUser().isAdmin());
+        patientToUpdate.getUser().setPassword((patient.getUser().getPassword()));
         patientRepository.save(patientToUpdate);
-
 
 
     }

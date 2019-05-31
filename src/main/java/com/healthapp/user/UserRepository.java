@@ -1,11 +1,14 @@
 package com.healthapp.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findUserByUserNameAndUserPwd(String name,String pwd);
+    User findUserByUsernameAndPassword(String name, String pwd);
 
+    User findUserByUsername(String name);
 
-    User findUserByUserId(long id);
+    User findUserById(long id);
 }

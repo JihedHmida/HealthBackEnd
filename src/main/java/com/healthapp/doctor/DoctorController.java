@@ -14,45 +14,44 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin( origins = "*",allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DoctorController {
 
     @Autowired
     private DoctorService doctorService;
 
+    @Autowired
+
 
     @RequestMapping("/doctors")
-    public List<Doctor> getAllDoctors()
-    {
+    public List<Doctor> getAllDoctors() {
         return doctorService.findAll();
     }
 
     @RequestMapping("/doctors/{id}")
-    public Doctor getDoctorById(@PathVariable long id)
-    {
+    public Doctor getDoctorById(@PathVariable long id) {
         return doctorService.findDoctorById(id);
     }
 
 
+    Map<String, String> errors;
 
-
-    Map<String,String> errors ;
     @SuppressWarnings("Duplicates")
-    @RequestMapping(method = RequestMethod.POST,value = "/doctors/add")
-    public ResponseEntity<Object> addDoctor(@RequestBody @Valid Doctor doc, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    @RequestMapping(method = RequestMethod.POST, value = "/doctors/add")
+    public ResponseEntity<Object> addDoctor(@RequestBody @Valid Doctor doc, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             errors = new HashMap<>();
-            for(FieldError error:bindingResult.getFieldErrors()){
-                errors.put(error.getField(),error.getDefaultMessage());
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
             }
             return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
         }
 
-        Doctor d = doctorService.findDoctorByEmail (doc.getEmail());
-        if(d!=null){
-            return new ResponseEntity<>("User Already Exist ",HttpStatus.CONFLICT);
+        Doctor d = doctorService.findDoctorByEmail(doc.getEmail());
+        if (d != null) {
+            return new ResponseEntity<>("User Already Exist ", HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(doctorService.addDoctor(doc),HttpStatus.OK);
+        return new ResponseEntity<>(doctorService.addDoctor(doc), HttpStatus.OK);
     }
 
 
@@ -66,21 +65,14 @@ public class DoctorController {
     }
     */
 
-    @RequestMapping(method = RequestMethod.PUT,value = "/doctors/{id}")
-    public void updateDoctor(@RequestBody Doctor doc,@PathVariable long id)
-    {
-        doctorService.updateDoctor(doc,id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/doctors/{id}")
+    public void updateDoctor(@RequestBody Doctor doc, @PathVariable long id) {
+        doctorService.updateDoctor(doc, id);
     }
 
 
-
-
-
-
-
-    @RequestMapping(method = RequestMethod.DELETE,value = "/doctors/{id}")
-    public void deleteDoctor(@PathVariable long id )
-    {
+    @RequestMapping(method = RequestMethod.DELETE, value = "/doctors/{id}")
+    public void deleteDoctor(@PathVariable long id) {
         doctorService.deleteDoctor(id);
     }
 }

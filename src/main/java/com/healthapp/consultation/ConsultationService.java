@@ -18,29 +18,28 @@ public class ConsultationService {
 
 
     public List<Consultation> findAll() {
-        return  consultationRepository.findAll();
+        return consultationRepository.findAll();
     }
 
-    public void  addConsultation (Consultation consultation){
+    public void addConsultation(Consultation consultation) {
 
         consultationRepository.save(consultation);
     }
 
-    public List<Consultation> findConsultationsByPatientId(long id)
-    {
-       return consultationRepository.findConsultationsByPatientId(id);
+    public List<Consultation> findConsultationsByPatientId(long id) {
+        return consultationRepository.findConsultationsByPatientId(id);
     }
-    public List<Consultation> findConsultationsByDoctorId(long id )
-    {
-        return  consultationRepository.findConsultationsByDoctorId(id);
+
+    public List<Consultation> findConsultationsByDoctorId(long id) {
+        return consultationRepository.findConsultationsByDoctorId(id);
     }
 
     public Consultation findConsultationByID(long id) {
-        return  consultationRepository.findConsultationById(id);
+        return consultationRepository.findConsultationById(id);
     }
 
     public void deleteConsultation(long id) {
-         consultationRepository.delete(findConsultationByID(id));
+        consultationRepository.delete(findConsultationByID(id));
     }
 
     public void updateConsultation(Consultation consultation, long id) {

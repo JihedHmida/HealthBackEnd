@@ -3,37 +3,35 @@ package com.healthapp.doctor;
 import com.healthapp.user.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 public class Doctor implements Serializable {
 
-    private static final  long serialVersionUID = 1L ;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Did",nullable = false,updatable = false)
-    private long    id ;
-    @NotBlank(message="Please enter your name")
-    private String  firstName;
+    @Column(name = "Did", nullable = false, updatable = false)
+    private long id;
+    @NotBlank(message = "Please enter your name")
+    private String firstName;
     //@NotBlank(message="Please enter your last name")
-    private String  lastName;
+    private String lastName;
     //@NotBlank(message="Please enter your birthday")
     @Temporal(TemporalType.DATE)
-    private Date    birthDate;
-    private byte[]  photo;
-    @NotBlank(message="Please enter your email")
+    private Date birthDate;
+    private byte[] photo;
+    @NotBlank(message = "Please enter your email")
     //@Email(message="Please enter a valid email")
-    private String  email;
+    private String email;
     //@NotBlank(message="Please enter your public Code")
-    private String  publicCode;
+    private String publicCode;
     //@NotBlank(message="Please enter your phone number")
     //@Pattern(regexp="[\\d]{8}",message = "Check your phone Number")
-    private String  phone;
+    private String phone;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
@@ -104,8 +102,7 @@ public class Doctor implements Serializable {
         this.phone = phone;
     }
 
-    public  boolean equals(Doctor doctor)
-    {
+    public boolean equals(Doctor doctor) {
         return (this.id == doctor.id);
     }
 

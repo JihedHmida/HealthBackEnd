@@ -21,44 +21,36 @@ public class PatientController {
     private PatientService patientService;
 
     @RequestMapping("/patient")
-    public List<Patient> getAllPatient()
-    {
+    public List<Patient> getAllPatient() {
         return patientService.findAll();
     }
 
     @RequestMapping("/patient/{id}")
-    public Patient getPatientById(@PathVariable long id)
-    {
+    public Patient getPatientById(@PathVariable long id) {
         return patientService.findPatientById(id);
     }
 
 
+    Map<String, String> errors;
 
-    Map<String,String> errors ;
     @SuppressWarnings("Duplicates")
-    @RequestMapping(method = RequestMethod.POST,value = "/patient/add")
-    public ResponseEntity<Object> addDoctor(@RequestBody @Valid Patient patient, BindingResult bindingResult){
+    @RequestMapping(method = RequestMethod.POST, value = "/patient/add")
+    public ResponseEntity<Object> addDoctor(@RequestBody @Valid Patient patient, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             errors = new HashMap<>();
-            for(FieldError error:bindingResult.getFieldErrors()){
-                errors.put(error.getField(),error.getDefaultMessage());
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
             }
             return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
         }
 
-        Patient p = patientService.findDoctorByEmail (patient.getEmail());
-        if(p!=null){
-            return new ResponseEntity<>("User Already Exist ",HttpStatus.CONFLICT);
+        Patient p = patientService.findDoctorByEmail(patient.getEmail());
+        if (p != null) {
+            return new ResponseEntity<>("User Already Exist ", HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(patientService.addPatient(patient),HttpStatus.OK);
+        return new ResponseEntity<>(patientService.addPatient(patient), HttpStatus.OK);
     }
-
-
-
-
-
-
 
 
     /*
@@ -68,15 +60,13 @@ public class PatientController {
         patientService.addPatient(patient);
     }
 */
-    @RequestMapping(method = RequestMethod.PUT,value = "/patient/{id}")
-    public void updatePatient(@RequestBody Patient patient,@PathVariable long id)
-    {
-        patientService.updatePatient(patient,id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/patient/{id}")
+    public void updatePatient(@RequestBody Patient patient, @PathVariable long id) {
+        patientService.updatePatient(patient, id);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE,value = "/patient/{id}")
-    public void deletePatient(@PathVariable long id )
-    {
+    @RequestMapping(method = RequestMethod.DELETE, value = "/patient/{id}")
+    public void deletePatient(@PathVariable long id) {
         patientService.deletePatient(id);
     }
 }
